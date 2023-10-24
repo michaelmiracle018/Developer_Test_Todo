@@ -1,0 +1,29 @@
+.app__header-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 60px;
+	flex-wrap: wrap;
+}
+
+
+
+.btn {
+	background-color: var(--primaryblue);
+	color: var(--white);
+	cursor: pointer;
+}
+select:hover {
+	border: 1px solid var(--black);
+}
+.app__header-input {
+    margin-top: 1.5rem;
+}
+.app__header-input input {
+	border: 1px solid var(--black);
+}
+/* @media screen and (max-width: 740px) {
+	.app__header-container {
+		justify-content: center;
+	}
+} */

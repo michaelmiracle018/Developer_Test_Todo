@@ -1,0 +1,12 @@
+.content__wrapper {
+	margin-top: 3rem;
+	background-color: var(--bg-2);
+	padding: 2rem;
+	border-radius: 12px;
+}
+
+@media screen and (max-width: 768px) {
+	.content__wrapper {
+		padding: 1.5rem;
+	}
+}
