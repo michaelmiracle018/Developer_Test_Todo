@@ -31,8 +31,6 @@ function App() {
 		);
 	}
 
-
-
 	return (
 		<div className="container">
 			<h1 className="titles">TODO LIST</h1>
@@ -43,10 +41,7 @@ function App() {
 					setSearchTodo={setSearchTodo!}
 					searchTodo={searchTodo!}
 				/>
-				<AppContent
-					filterStatus={filterStatus!}
-					filteredCategory={filterCategory!}
-				/>
+				<AppContent filteredCategory={filterCategory!} />
 				<div className="flex__center" onClick={deleteAllTodos}>
 					<button
 						className="btn__style"

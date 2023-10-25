@@ -5,7 +5,6 @@ import { useTodo } from "../../context/TodoContext";
 import Alert from "../alert/Alert";
 
 type Props = {
-	filterStatus: string;
 	filteredCategory: IData[];
 };
 
