@@ -1,4 +1,3 @@
-
 import TodoItem from "../todoItem/TodoItem";
 import "./appContent.css";
 import { IData } from "../../shared/types";
@@ -16,14 +15,20 @@ const AppContent = ({ filterStatus, filteredCategory }: Props) => {
 
 	if (!dataTodos.length) {
 		return (
-			<div className="content__wrapper msg__text" style={{ color: "red" }}>
+			<div
+				className="content__wrapper msg__text flex__center"
+				style={{ color: "red" }}
+			>
 				Add a Todo List
 			</div>
 		);
 	}
 	if (!filteredCategory.length) {
 		return (
-			<div className="content__wrapper msg__text" style={{ color: "red" }}>
+			<div
+				className="content__wrapper msg__text flex__center"
+				style={{ color: "red" }}
+			>
 				No Todo Found
 			</div>
 		);
