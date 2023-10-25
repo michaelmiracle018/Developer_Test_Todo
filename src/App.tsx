@@ -1,10 +1,8 @@
-
 import "./App.css";
-import { AppContent, AppHeader, } from "./components";
+import { AppContent, AppHeader } from "./components";
 // import { useTodo } from "./context/TodoContext";
 
 function App() {
-
 	return (
 		<div className="container">
 			<h1 className="titles">TODO LIST</h1>

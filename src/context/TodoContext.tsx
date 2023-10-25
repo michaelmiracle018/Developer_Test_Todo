@@ -53,7 +53,7 @@ export const TodoProvider = ({ children }: IProps) => {
 		);
 	};
 	const handleDeleteTodo = (todo: IData) => {
-		console.log(todo);
+		setDataTodos(dataTodos.filter((itm) => itm.id !== todo.id));
 	};
 
 	const contextData = {

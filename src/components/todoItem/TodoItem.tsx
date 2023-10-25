@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { IData } from "../../shared/types";
 import Modal from "../modal/Modal";
+import { useTodo } from "../../context/TodoContext";
 
 type Props = {
 	todo: IData;
@@ -11,9 +12,13 @@ type Props = {
 
 const TodoItem = ({ todo }: Props) => {
 	const [updateModalOpen, setUpdateModalOpen] = useState(false);
+	const response = useTodo();
 
 	const handleEditTodo = () => {
 		setUpdateModalOpen(true);
+	};
+	const deleteTodo = (todo: IData) => {
+		response?.handleDeleteTodo(todo);
 	};
 	return (
 		<div>
@@ -31,16 +36,24 @@ const TodoItem = ({ todo }: Props) => {
 					</div>
 				</div>
 				<div className="todo__actions">
-					<div className="icon" tabIndex={0} role="button">
+					<div
+						className="icon"
+						tabIndex={0}
+						role="button"
+						onClick={() => deleteTodo(todo)}
+					>
 						<MdDelete />
 					</div>
-					<div className="icon" tabIndex={0} role="button">
-						<MdEdit
-							onClick={() => {
-								handleEditTodo();
-							}}
-							onKeyDown={() => handleEditTodo()}
-						/>
+					<div
+						className="icon"
+						tabIndex={0}
+						role="button"
+						onClick={() => {
+							handleEditTodo();
+						}}
+						onKeyDown={() => handleEditTodo()}
+					>
+						<MdEdit />
 					</div>
 				</div>
 			</div>
