@@ -1,12 +1,9 @@
 ## About The App
 # App Name -- Todo List App
 
-# 
+# Getting Started with the app
 
-
-# Getting Started with Create React App
-
-## npm install -- to install dependencies
+## npm install -- To install dependencies
 
 ### `npm start` -- To run the application on localhost
 

@@ -19,4 +19,5 @@ select:hover {
 }
 .app__header-input input {
 	border: 1px solid var(--black);
+	text-transform: lowercase;
 }
