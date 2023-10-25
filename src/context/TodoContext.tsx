@@ -16,7 +16,7 @@ export const TodoProvider = ({ children }: IProps) => {
 	});
 
 	const saveTodo = (todo: IData) => {
-		showAlert(true, "success", "Item add successfully");
+		showAlert(true, "success", "Item added successfully");
 		setDataTodos([...dataTodos, todo]);
 	};
 	const handleEditTodo = (todo: IData) => {
