@@ -38,11 +38,13 @@ const TodoItem = ({ todo }: Props) => {
 		}
 	}, [todo]);
 
+	const copyTodoItem = (todo: IData) => {
+		response?.handleCopyTodo(todo);
+	};
 	return (
 		<div>
-			<div className="todo__item">
-				
-				<div className="todo__details">
+			<div className="todo__item" style={{ cursor: "pointer" }}>
+				<div className="todo__details" onClick={() => copyTodoItem(todo)}>
 					<div className="check__box-input">
 						<input
 							type="checkbox"
@@ -62,8 +64,13 @@ const TodoItem = ({ todo }: Props) => {
 					</div>
 				</div>
 				<div className="todo__actions">
-					<div className="icon" tabIndex={0} role="button">
-						<MdDelete onClick={() => handleDeleteModal(todo)} />
+					<div
+						className="icon"
+						tabIndex={0}
+						role="button"
+						onClick={() => handleDeleteModal(todo)}
+					>
+						<MdDelete />
 					</div>
 					<div
 						className="icon"

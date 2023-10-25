@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+
 import TodoItem from "../todoItem/TodoItem";
 import "./appContent.css";
 import { IData } from "../../shared/types";

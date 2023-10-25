@@ -22,6 +22,7 @@ export type TodoContextType = {
 	dataTodos: IData[] | null | string;
 	isAlert: IAlert;
 	showAlert: () => void;
+	handleCopyTodo: (todo: IData) => void;
 };
 
 export interface IProps {

@@ -32,6 +32,8 @@ export const TodoProvider = ({ children }: IProps) => {
 		);
 	};
 	const handleDeleteSingleTodo = (todo: IData) => {
+		showAlert(true, "success", "Item deleted successfully");
+
 		setDataTodos(dataTodos.filter((itm: IData) => itm.id !== todo.id));
 	};
 	const handleAllTodos = () => {
@@ -50,11 +52,17 @@ export const TodoProvider = ({ children }: IProps) => {
 			}),
 		);
 	};
+
 	useEffect(() => {
 		localStorage.setItem("todoList", JSON.stringify(dataTodos));
 	}, [dataTodos]);
+
 	const showAlert = (show = false, value = "", msg = "") => {
 		setIsAlert({ show, value, msg });
+	};
+	const handleCopyTodo = (todo: IData) => {
+		showAlert(true, "success", `${todo.title} copied to clipboard`);
+		navigator.clipboard.writeText(todo.title);
 	};
 
 	const contextData = {
@@ -72,6 +80,7 @@ export const TodoProvider = ({ children }: IProps) => {
 		setIsAlert,
 		isAlert,
 		showAlert,
+		handleCopyTodo,
 	};
 
 	return (
