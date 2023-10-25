@@ -31,9 +31,6 @@ function App() {
 		);
 	}
 
-	// if (!filterCategory.length) {
-
-	// }
 
 
 	return (

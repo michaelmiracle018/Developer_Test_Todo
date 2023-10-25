@@ -9,7 +9,7 @@ type Props = {
 	filteredCategory: IData[];
 };
 
-const AppContent = ({ filterStatus, filteredCategory }: Props) => {
+const AppContent = ({ filteredCategory }: Props) => {
 	const response = useTodo();
 	const { dataTodos } = response as unknown as { dataTodos: Array<IData> };
 
