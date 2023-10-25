@@ -27,7 +27,7 @@ const DeleteModal = ({
 							<MdOutlineClose onClick={() => setShowDeleteModal(false)} />
 						</div>
 						<div>
-							<h1 className="form__title">Add TODO</h1>
+							<h1 className="form__title">Delete Todo</h1>
 							<h4>Are you sure you want to delete this item?</h4>
 							<div style={{ marginTop: "1rem" }}>
 								<button

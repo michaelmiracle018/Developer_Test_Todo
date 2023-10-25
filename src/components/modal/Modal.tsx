@@ -74,7 +74,9 @@ const Modal = ({ type, showModal, setShowModal, todo }: Props) => {
 							<MdOutlineClose />
 						</div>
 						<div>
-							<h1 className="form__title">Add TODO</h1>
+							<h1 className="form__title">
+								{type === "update" ? "Update Todo" : "Add Todo"}
+							</h1>
 							{isAlert.show && (
 								<Alert
 									alert={isAlert!}
@@ -108,7 +110,9 @@ const Modal = ({ type, showModal, setShowModal, todo }: Props) => {
 									</select>
 								</label>
 								<div className="button__container">
-									<button className="btn__style modal__btn">Add Todo</button>
+									<button className="btn__style modal__btn">
+										{type === "update" ? "Update Todo" : "Add Todo"}
+									</button>
 								</div>
 							</form>
 						</div>
