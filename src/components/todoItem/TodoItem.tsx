@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./todoItem.css";
 import { format } from "date-fns";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { FiCopy } from "react-icons/fi";
 import { IData } from "../../shared/types";
 import Modal from "../modal/Modal";
 import { useTodo } from "../../context/TodoContext";
@@ -43,8 +44,8 @@ const TodoItem = ({ todo }: Props) => {
 	};
 	return (
 		<div>
-			<div className="todo__item" style={{ cursor: "pointer" }}>
-				<div className="todo__details" onClick={() => copyTodoItem(todo)}>
+			<div className="todo__item">
+				<div className="todo__details">
 					<div className="check__box-input">
 						<input
 							type="checkbox"
@@ -64,6 +65,14 @@ const TodoItem = ({ todo }: Props) => {
 					</div>
 				</div>
 				<div className="todo__actions">
+					<div
+						tabIndex={0}
+						className="icon"
+						role="button"
+						onClick={() => copyTodoItem(todo)}
+					>
+						<FiCopy />
+					</div>
 					<div
 						className="icon"
 						tabIndex={0}
