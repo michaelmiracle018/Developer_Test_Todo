@@ -17,7 +17,12 @@ export type TodoContextType = {
 	editTitle: IData | null | undefined;
 	isEdit: boolean;
 	setDataTodos: (todo: any) => void;
-	handleDeleteTodo: (todo: IData) => void;
+	handleDeleteSingleTodo: (todo: IData) => void;
+	handleAllTodos: () => void;
+	handleCheckTodo: (checked: boolean, todo: IData) => void;
+	dataTodos: IData[];
+	// setFilterStatus: (filterStatus: string) => void;
+	// filterStatus: string;
 };
 
 export interface IProps {

@@ -95,11 +95,9 @@ const Modal = ({ type, showModal, setShowModal, todo }: Props) => {
 									onChange={(e) => setStatus(e.target.value)}
 								>
 									{" "}
-									<option value="" disabled>
-										--Please choose an option--
-									</option>
-									<option value="incomplete">Incomplete</option>
-									<option value="complete">Completed</option>
+									<option value="">--Please choose an option--</option>
+									<option value="uncompleted">Uncompleted</option>
+									<option value="completed">Completed</option>
 								</select>
 							</label>
 							<div className="button__container">

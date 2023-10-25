@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TodoItem from "../todoItem/TodoItem";
 import "./appContent.css";
-import { IData, UserArray } from "../../shared/types";
+import { IData } from "../../shared/types";
 import { useTodo } from "../../context/TodoContext";
 
-const AppContent = () => {
+type Props = {
+	filterStatus: string;
+	filteredCategory: IData[];
+};
+
+const AppContent = ({ filterStatus, filteredCategory }: Props) => {
 	const response = useTodo();
 	const { dataTodos } = response as unknown as { dataTodos: Array<IData> };
 
+	if (!dataTodos.length) {
+		return <div className="content__wrapper">Add a Todo List</div>;
+	}
 	return (
 		<div className="content__wrapper">
-			{dataTodos.map((item: IData) => (
-				<TodoItem key={item.id} todo={item} />
-			))}
+			{filteredCategory.map((item: IData) => {
+				return <TodoItem key={item.id} todo={item} />;
+			})}
 		</div>
 	);
 };

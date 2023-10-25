@@ -1,9 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./appHeader.css";
 import Modal from "../modal/Modal";
+import { useTodo } from "../../context/TodoContext";
+import { IData } from "../../shared/types";
+type Props = {
+	setFilterStatus: (filterStatus: string) => void;
+	filterStatus: string;
+	setSearchTodo: (searchTodo: string) => void;
+	searchTodo: string;
+};
 
-const AppHeader = () => {
+const AppHeader = ({
+	setFilterStatus,
+	filterStatus,
+	setSearchTodo,
+	searchTodo,
+}: Props) => {
 	const [showModal, setShowModal] = useState(false);
+	// const [searchTerm, setSearchTerm] = useState("");
+
+	const handleSearchTodoList = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchTodo(e.target.value);
+	};
+
+	const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setFilterStatus(e.target.value);
+	};
 
 	return (
 		<div>
@@ -15,10 +37,16 @@ const AppHeader = () => {
 				</div>
 
 				<div>
-					<select name="" id="" className="btn__style">
+					<select
+						name=""
+						id=""
+						className="btn__style"
+						value={filterStatus}
+						onChange={(e) => handleFilter(e)}
+					>
 						<option value="all">All</option>
-						<option value="incomplete">Incomplete</option>
-						<option value="complete">Completed</option>
+						<option value="uncompleted">Incomplete</option>
+						<option value="completed">Completed</option>
 					</select>
 				</div>
 			</div>
@@ -28,6 +56,8 @@ const AppHeader = () => {
 					type="text"
 					placeholder="search todo"
 					style={{ cursor: "caret" }}
+					value={searchTodo}
+					onChange={(e) => handleSearchTodoList(e)}
 				/>
 			</div>
 
