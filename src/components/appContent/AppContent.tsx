@@ -14,7 +14,10 @@ const AppContent = ({ filterStatus, filteredCategory }: Props) => {
 	const { dataTodos } = response as unknown as { dataTodos: Array<IData> };
 
 	if (!dataTodos.length) {
-		return <div className="content__wrapper">Add a Todo List</div>;
+		return <div className="content__wrapper msg__text">Add a Todo List</div>;
+	}
+	if (!filteredCategory.length) {
+		return <div className="content__wrapper msg__text">No Todo Found</div>;
 	}
 	return (
 		<div className="content__wrapper">

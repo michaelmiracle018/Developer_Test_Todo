@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./todoItem.css";
 import { format } from "date-fns";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { IData } from "../../shared/types";
 import Modal from "../modal/Modal";
 import { useTodo } from "../../context/TodoContext";
+import DeleteModal from "../deleteModal/DeleteModal";
 
 type Props = {
 	todo: IData;
@@ -13,14 +14,17 @@ type Props = {
 const TodoItem = ({ todo }: Props) => {
 	const [updateModalOpen, setUpdateModalOpen] = useState(false);
 	const [checked, setChecked] = useState(false);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [todoItem, setTodoItem] = useState<IData | null>(null);
 
 	const response = useTodo();
 
 	const handleEditTodo = () => {
 		setUpdateModalOpen(true);
 	};
-	const deleteTodo = (todo: IData) => {
-		response?.handleDeleteSingleTodo(todo);
+	const handleDeleteModal = (todo: IData) => {
+		setShowDeleteModal(true);
+		setTodoItem(todo);
 	};
 	const toggleCheck = (checked: boolean, todo: IData) => {
 		setChecked(!checked);
@@ -57,14 +61,10 @@ const TodoItem = ({ todo }: Props) => {
 					</div>
 				</div>
 				<div className="todo__actions">
-					<div
-						className="icon"
-						tabIndex={0}
-						role="button"
-						onClick={() => deleteTodo(todo)}
-					>
-						<MdDelete />
+					<div className="icon" tabIndex={0} role="button">
+						<MdDelete onClick={() => handleDeleteModal(todo)} />
 					</div>
+					{/* onClick={() => deleteTodo(todo)} */}
 					<div
 						className="icon"
 						tabIndex={0}
@@ -83,6 +83,11 @@ const TodoItem = ({ todo }: Props) => {
 				showModal={updateModalOpen}
 				setShowModal={setUpdateModalOpen}
 				todo={todo}
+			/>
+			<DeleteModal
+				showDeleteModal={showDeleteModal}
+				setShowDeleteModal={setShowDeleteModal}
+				todoItem={todoItem!}
 			/>
 		</div>
 	);

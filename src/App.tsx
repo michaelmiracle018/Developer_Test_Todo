@@ -31,6 +31,10 @@ function App() {
 		);
 	}
 
+	// if (!filterCategory.length) {
+
+	// }
+
 
 	return (
 		<div className="container">
