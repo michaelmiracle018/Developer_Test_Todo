@@ -69,6 +69,7 @@ const TodoItem = ({ todo }: Props) => {
 						tabIndex={0}
 						role="button"
 						onClick={() => handleDeleteModal(todo)}
+						onKeyDown={() => handleDeleteModal(todo)}
 					>
 						<MdDelete />
 					</div>
