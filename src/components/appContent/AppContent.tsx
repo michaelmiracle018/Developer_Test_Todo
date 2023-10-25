@@ -3,6 +3,7 @@ import TodoItem from "../todoItem/TodoItem";
 import "./appContent.css";
 import { IData } from "../../shared/types";
 import { useTodo } from "../../context/TodoContext";
+import Alert from "../alert/Alert";
 
 type Props = {
 	filterStatus: string;
@@ -14,13 +15,28 @@ const AppContent = ({ filterStatus, filteredCategory }: Props) => {
 	const { dataTodos } = response as unknown as { dataTodos: Array<IData> };
 
 	if (!dataTodos.length) {
-		return <div className="content__wrapper msg__text">Add a Todo List</div>;
+		return (
+			<div className="content__wrapper msg__text" style={{ color: "red" }}>
+				Add a Todo List
+			</div>
+		);
 	}
 	if (!filteredCategory.length) {
-		return <div className="content__wrapper msg__text">No Todo Found</div>;
+		return (
+			<div className="content__wrapper msg__text" style={{ color: "red" }}>
+				No Todo Found
+			</div>
+		);
 	}
 	return (
 		<div className="content__wrapper">
+			{response?.isAlert.show && (
+				<Alert
+					alert={response?.isAlert!}
+					showAlert={response?.showAlert!}
+					todo={response?.dataTodos!}
+				/>
+			)}
 			{filteredCategory.map((item: IData) => {
 				return <TodoItem key={item.id} todo={item} />;
 			})}

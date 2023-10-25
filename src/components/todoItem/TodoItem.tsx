@@ -41,6 +41,7 @@ const TodoItem = ({ todo }: Props) => {
 	return (
 		<div>
 			<div className="todo__item">
+				
 				<div className="todo__details">
 					<div className="check__box-input">
 						<input
@@ -64,7 +65,6 @@ const TodoItem = ({ todo }: Props) => {
 					<div className="icon" tabIndex={0} role="button">
 						<MdDelete onClick={() => handleDeleteModal(todo)} />
 					</div>
-					{/* onClick={() => deleteTodo(todo)} */}
 					<div
 						className="icon"
 						tabIndex={0}

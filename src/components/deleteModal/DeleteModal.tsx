@@ -1,4 +1,3 @@
-import React from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { IData } from "../../shared/types";
 import { useTodo } from "../../context/TodoContext";
@@ -33,7 +32,11 @@ const DeleteModal = ({
 							<div style={{ marginTop: "1rem" }}>
 								<button
 									className="btn__style"
-									style={{ cursor: "pointer" }}
+									style={{
+										cursor: "pointer",
+										background: "#78b5f2",
+										color: "#fff",
+									}}
 									onClick={() => deleteItem(todoItem)}
 								>
 									Yes

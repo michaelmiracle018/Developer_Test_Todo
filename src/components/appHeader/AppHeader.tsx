@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./appHeader.css";
 import Modal from "../modal/Modal";
-import { useTodo } from "../../context/TodoContext";
-import { IData } from "../../shared/types";
 type Props = {
 	setFilterStatus: (filterStatus: string) => void;
 	filterStatus: string;

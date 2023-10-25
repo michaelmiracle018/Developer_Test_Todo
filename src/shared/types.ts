@@ -9,7 +9,6 @@ export interface UserArray {
 }
 
 export type TodoContextType = {
-	// todos: IData[];
 	saveTodo: (todo: IData) => void;
 	showModal: boolean;
 	setShowModal: (showModal: boolean) => void;
@@ -20,9 +19,9 @@ export type TodoContextType = {
 	handleDeleteSingleTodo: (todo: IData) => void;
 	handleAllTodos: () => void;
 	handleCheckTodo: (checked: boolean, todo: IData) => void;
-	dataTodos: IData[] | null | string ;
-	// setFilterStatus: (filterStatus: string) => void;
-	// filterStatus: string;
+	dataTodos: IData[] | null | string;
+	isAlert: IAlert;
+	showAlert: () => void;
 };
 
 export interface IProps {

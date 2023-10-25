@@ -6,8 +6,6 @@
 	flex-wrap: wrap;
 }
 
-
-
 .btn {
 	background-color: var(--primaryblue);
 	color: var(--white);
@@ -17,13 +15,8 @@ select:hover {
 	border: 1px solid var(--black);
 }
 .app__header-input {
-    margin-top: 1.5rem;
+	margin-top: 1.5rem;
 }
 .app__header-input input {
 	border: 1px solid var(--black);
 }
-/* @media screen and (max-width: 740px) {
-	.app__header-container {
-		justify-content: center;
-	}
-} */

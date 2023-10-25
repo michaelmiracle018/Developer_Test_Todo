@@ -13,8 +13,6 @@ type Props = {
 };
 
 const Modal = ({ type, showModal, setShowModal, todo }: Props) => {
-	// console.log(type);
-
 	const response = useTodo();
 	const [title, setTitle] = useState("");
 	const [status, setStatus] = useState("");

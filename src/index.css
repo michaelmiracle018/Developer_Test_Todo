@@ -47,6 +47,10 @@ body {
 	font-family: Poppins;
 	outline: none;
 }
+.del-btn {
+	background-color: var(--primaryblue);
+	color: var(--white);
+}
 .flex__center {
 	display: flex;
 	justify-content: center;

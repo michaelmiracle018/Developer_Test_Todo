@@ -1,26 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { TodoContextType, IData, IProps } from "../shared/types";
+import { createContext, useContext, useEffect, useState } from "react";
+import { TodoContextType, IData, IProps, IAlert } from "../shared/types";
 import { getLocalStorage } from "../shared/dataStorage";
-const data = [
-	{
-		title: "test great",
-		id: 101,
-		date: "10/21/2023, 9:29:10 PM",
-		status: "completed",
-	},
-	{
-		title: "test nice",
-		id: 102,
-		date: "10/24/2023, 2:04:07 PM",
-		status: "completed",
-	},
-	{
-		title: "test good",
-		id: 103,
-		date: "09/24/2023, 9:04:07 PM",
-		status: "uncompleted",
-	},
-];
 
 export const TodoContext = createContext<TodoContextType | null>(null);
 
@@ -29,16 +9,23 @@ export const TodoProvider = ({ children }: IProps) => {
 	const [showModal, setShowModal] = useState(false);
 	const [isEdit, setIsEdit] = useState(false);
 	const [editTitle, setEditTitle] = useState<IData | null | undefined>(null);
+	const [isAlert, setIsAlert] = useState<IAlert>({
+		msg: "",
+		show: false,
+		value: "",
+	});
 
 	const saveTodo = (todo: IData) => {
+		showAlert(true, "success", "Item add successfully");
 		setDataTodos([...dataTodos, todo]);
 	};
 	const handleEditTodo = (todo: IData) => {
-		console.log(todo);
+		showAlert(true, "success", "Item edited successfully");
+
 		setDataTodos(
 			dataTodos.map((itm: IData) => {
 				if (itm.id === todo.id) {
-					return { ...itm, title: todo.title };
+					return { ...itm, title: todo.title, status: todo.status };
 				}
 				return itm;
 			}),
@@ -52,6 +39,8 @@ export const TodoProvider = ({ children }: IProps) => {
 	};
 
 	const handleCheckTodo = (checked: boolean, todo: IData) => {
+		showAlert(true, "success", "Item status changed");
+
 		setDataTodos(
 			dataTodos.map((itm: IData) => {
 				if (itm.id === todo.id) {
@@ -64,6 +53,9 @@ export const TodoProvider = ({ children }: IProps) => {
 	useEffect(() => {
 		localStorage.setItem("todoList", JSON.stringify(dataTodos));
 	}, [dataTodos]);
+	const showAlert = (show = false, value = "", msg = "") => {
+		setIsAlert({ show, value, msg });
+	};
 
 	const contextData = {
 		saveTodo,
@@ -77,6 +69,9 @@ export const TodoProvider = ({ children }: IProps) => {
 		handleDeleteSingleTodo,
 		handleAllTodos,
 		handleCheckTodo,
+		setIsAlert,
+		isAlert,
+		showAlert,
 	};
 
 	return (
