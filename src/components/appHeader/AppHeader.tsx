@@ -43,7 +43,7 @@ const AppHeader = ({
 						onChange={(e) => handleFilter(e)}
 					>
 						<option value="all">All</option>
-						<option value="uncompleted">Incomplete</option>
+						<option value="uncompleted">Uncompleted</option>
 						<option value="completed">Completed</option>
 					</select>
 				</div>
