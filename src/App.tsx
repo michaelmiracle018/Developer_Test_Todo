@@ -15,24 +15,9 @@ function App() {
 		response?.handleAllTodos();
 	};
 
-	let filterCategory;
+	let filterCategory: IData[];
 
-	filterCategory = [...dataTodos].filter((item) => {
-		if (searchTodo === "") {
-			return item;
-		}
-		console.log(
-			item.title.toLocaleLowerCase().includes(searchTodo.toLocaleLowerCase()),
-		);
-
-		if (item.title.toLowerCase().includes(searchTodo.toLowerCase())) {
-			return item;
-		} else {
-			return console.log("not found");
-		}
-	});
-
-	filterCategory = [...dataTodos].filter((item) => {
+	filterCategory = dataTodos.filter((item) => {
 		if (filterStatus === "all") {
 			return true;
 		} else {
@@ -40,7 +25,12 @@ function App() {
 		}
 	});
 
-	console.log(filterCategory);
+	if (searchTodo) {
+		filterCategory = dataTodos.filter((item) =>
+			item.title.toLowerCase().includes(searchTodo.toLowerCase()),
+		);
+	}
+
 
 	return (
 		<div className="container">

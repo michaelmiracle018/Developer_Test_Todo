@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { TodoContextType, IData, IProps } from "../shared/types";
+import { getLocalStorage } from "../shared/dataStorage";
 const data = [
 	{
 		title: "test great",
@@ -20,10 +21,11 @@ const data = [
 		status: "uncompleted",
 	},
 ];
+
 export const TodoContext = createContext<TodoContextType | null>(null);
 
 export const TodoProvider = ({ children }: IProps) => {
-	const [dataTodos, setDataTodos] = useState(data);
+	const [dataTodos, setDataTodos] = useState(getLocalStorage());
 	const [showModal, setShowModal] = useState(false);
 	const [isEdit, setIsEdit] = useState(false);
 	const [editTitle, setEditTitle] = useState<IData | null | undefined>(null);
@@ -34,7 +36,7 @@ export const TodoProvider = ({ children }: IProps) => {
 	const handleEditTodo = (todo: IData) => {
 		console.log(todo);
 		setDataTodos(
-			dataTodos.map((itm) => {
+			dataTodos.map((itm: IData) => {
 				if (itm.id === todo.id) {
 					return { ...itm, title: todo.title };
 				}
@@ -43,7 +45,7 @@ export const TodoProvider = ({ children }: IProps) => {
 		);
 	};
 	const handleDeleteSingleTodo = (todo: IData) => {
-		setDataTodos(dataTodos.filter((itm) => itm.id !== todo.id));
+		setDataTodos(dataTodos.filter((itm: IData) => itm.id !== todo.id));
 	};
 	const handleAllTodos = () => {
 		setDataTodos([]);
@@ -51,7 +53,7 @@ export const TodoProvider = ({ children }: IProps) => {
 
 	const handleCheckTodo = (checked: boolean, todo: IData) => {
 		setDataTodos(
-			dataTodos.map((itm) => {
+			dataTodos.map((itm: IData) => {
 				if (itm.id === todo.id) {
 					return { ...itm, status: checked ? "completed" : "uncompleted" };
 				}
@@ -59,6 +61,9 @@ export const TodoProvider = ({ children }: IProps) => {
 			}),
 		);
 	};
+	useEffect(() => {
+		localStorage.setItem("todoList", JSON.stringify(dataTodos));
+	}, [dataTodos]);
 
 	const contextData = {
 		saveTodo,

@@ -20,7 +20,7 @@ export type TodoContextType = {
 	handleDeleteSingleTodo: (todo: IData) => void;
 	handleAllTodos: () => void;
 	handleCheckTodo: (checked: boolean, todo: IData) => void;
-	dataTodos: IData[];
+	dataTodos: IData[] | null | string ;
 	// setFilterStatus: (filterStatus: string) => void;
 	// filterStatus: string;
 };
@@ -35,4 +35,10 @@ export interface IModal {
 
 export interface IEdit {
 	handleEditTodos: () => void;
+}
+
+export interface IAlert {
+	msg: string;
+	show: boolean;
+	value: string;
 }

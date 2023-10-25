@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import "./modal.css";
 import { useTodo } from "../../context/TodoContext";
-import { IData } from "../../shared/types";
-import { log } from "console";
+import { IAlert, IData } from "../../shared/types";
+import Alert from "../alert/Alert";
 
 type Props = {
 	type: string;
@@ -11,13 +11,14 @@ type Props = {
 	setShowModal: (showModal: boolean) => void;
 	todo: IData | null;
 };
+
 const Modal = ({ type, showModal, setShowModal, todo }: Props) => {
 	// console.log(type);
 
 	const response = useTodo();
 	const [title, setTitle] = useState("");
 	const [status, setStatus] = useState("");
-	const [isAlert, setIsAlert] = useState({
+	const [isAlert, setIsAlert] = useState<IAlert>({
 		msg: "",
 		show: false,
 		value: "",
@@ -29,14 +30,15 @@ const Modal = ({ type, showModal, setShowModal, todo }: Props) => {
 			setStatus(todo.status);
 		} else {
 			setTitle("");
-			setStatus("incomplete");
+			setStatus("");
 		}
 	}, [type, showModal, todo]);
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		if (!title) {
-			alert("Please enter a title");
+		if (!title || !status) {
+			showAlert(true, "danger", "please fill all fields");
+
 			return;
 		}
 		if (type === "add") {
@@ -64,8 +66,6 @@ const Modal = ({ type, showModal, setShowModal, todo }: Props) => {
 		<div>
 			{showModal && (
 				<div className="modal__wrapper">
-					{/*alert.show && <Alert {...alert}  />*/}
-
 					<div className="modal__container">
 						<div
 							className="close__button"
@@ -75,35 +75,45 @@ const Modal = ({ type, showModal, setShowModal, todo }: Props) => {
 						>
 							<MdOutlineClose />
 						</div>
-
-						<form className="form" onSubmit={(e) => handleSubmit(e)}>
+						<div>
 							<h1 className="form__title">Add TODO</h1>
-							<label htmlFor="title">
-								Title
-								<input
-									type="text"
-									id="title"
-									value={title}
-									onChange={(e) => setTitle(e.target.value)}
+							{isAlert.show && (
+								<Alert
+									alert={isAlert!}
+									showAlert={showAlert}
+									todo={response?.dataTodos!}
 								/>
-							</label>
-							<label htmlFor="type">
-								Status
-								<select
-									id="type"
-									value={status}
-									onChange={(e) => setStatus(e.target.value)}
-								>
-									{" "}
-									<option value="">--Please choose an option--</option>
-									<option value="uncompleted">Uncompleted</option>
-									<option value="completed">Completed</option>
-								</select>
-							</label>
-							<div className="button__container">
-								<button className="btn__style modal__btn">Add Todo</button>
-							</div>
-						</form>
+							)}
+							<form className="form" onSubmit={(e) => handleSubmit(e)}>
+								<label htmlFor="title">
+									Title
+									<input
+										type="text"
+										id="title"
+										value={title}
+										onChange={(e) => setTitle(e.target.value)}
+									/>
+								</label>
+								<label htmlFor="type">
+									Status
+									<select
+										id="type"
+										value={status}
+										onChange={(e) => setStatus(e.target.value)}
+									>
+										{" "}
+										<option value="" disabled>
+											--Please choose an option--
+										</option>
+										<option value="uncompleted">Uncompleted</option>
+										<option value="completed">Completed</option>
+									</select>
+								</label>
+								<div className="button__container">
+									<button className="btn__style modal__btn">Add Todo</button>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			)}
