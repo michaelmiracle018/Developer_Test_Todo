@@ -1,12 +1,18 @@
 import React from "react";
 import TodoItem from "../todoItem/TodoItem";
-import './appContent.css'
-type Props = {};
+import "./appContent.css";
+import { IData, UserArray } from "../../shared/types";
+import { useTodo } from "../../context/TodoContext";
 
-const AppContent = (props: Props) => {
+const AppContent = () => {
+	const response = useTodo();
+	const { dataTodos } = response as unknown as { dataTodos: Array<IData> };
+
 	return (
 		<div className="content__wrapper">
-            <TodoItem />            
+			{dataTodos.map((item: IData) => (
+				<TodoItem key={item.id} todo={item} />
+			))}
 		</div>
 	);
 };

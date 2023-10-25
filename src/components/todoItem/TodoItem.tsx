@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./todoItem.css";
 import { format } from "date-fns";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { IData } from "../../shared/types";
+import Modal from "../modal/Modal";
 
-type Props = {};
+type Props = {
+	todo: IData;
+};
 
-const TodoItem = (props: Props) => {
+const TodoItem = ({ todo }: Props) => {
+	const [updateModalOpen, setUpdateModalOpen] = useState(false);
+
+	const handleEditTodo = () => {
+		setUpdateModalOpen(true);
+	};
 	return (
 		<div>
 			<div className="todo__item">
@@ -15,9 +24,9 @@ const TodoItem = (props: Props) => {
 					</div>
 
 					<div className="text">
-						<p className="">TodoItem</p>
+						<p className="">{todo.title}</p>
 						<p className="time">
-							{format(new Date("10/24/2023, 9:04:07 PM"), "p, MM/dd/yyyy")}
+							{format(new Date(todo.date), "p, MM/dd/yyyy")}
 						</p>
 					</div>
 				</div>
@@ -26,10 +35,21 @@ const TodoItem = (props: Props) => {
 						<MdDelete />
 					</div>
 					<div className="icon" tabIndex={0} role="button">
-						<MdEdit />
+						<MdEdit
+							onClick={() => {
+								handleEditTodo();
+							}}
+							onKeyDown={() => handleEditTodo()}
+						/>
 					</div>
 				</div>
 			</div>
+			<Modal
+				type="update"
+				showModal={updateModalOpen}
+				setShowModal={setUpdateModalOpen}
+				todo={todo}
+			/>
 		</div>
 	);
 };

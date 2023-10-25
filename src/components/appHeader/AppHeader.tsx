@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./appHeader.css";
+import Modal from "../modal/Modal";
 
-type Props = {};
+const AppHeader = () => {
+	const [showModal, setShowModal] = useState(false);
 
-const AppHeader = (props: Props) => {
 	return (
 		<div>
 			<div className="app__header-container">
 				<div>
-					<button className="btn__style btn">Add Todo</button>
+					<button className="btn__style btn" onClick={() => setShowModal(true)}>
+						Add Todo
+					</button>
 				</div>
 
 				<div>
@@ -27,6 +30,14 @@ const AppHeader = (props: Props) => {
 					style={{ cursor: "caret" }}
 				/>
 			</div>
+
+			<Modal
+				type="add"
+				showModal={showModal}
+				setShowModal={setShowModal}
+				todo={null}
+			/>
+
 			{/*<TodoModal type="add" modalOpen={modalOpen} setModalOpen={setModalOpen} />*/}
 		</div>
 	);
